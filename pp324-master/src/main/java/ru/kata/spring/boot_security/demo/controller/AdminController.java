@@ -1,17 +1,14 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -32,17 +29,19 @@ public class AdminController {
     }
 
     @PostMapping("/addNewUser")
-    public String saveUser(@ModelAttribute("user")User user, BindingResult result) {
+    public String saveUser(@ModelAttribute("user") User user, BindingResult result) {
 
         userService.save(user);
         return "redirect:/admin";
     }
 
     @PatchMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @ModelAttribute("user")User user, BindingResult result) {
-
+    public String updateUser(@PathVariable("id") @ModelAttribute("user") User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/admin";
+        }
         userService.update(user);
-        return "redirect:/admin";
+        return "admin";
     }
 
     @DeleteMapping("/delete/{id}")

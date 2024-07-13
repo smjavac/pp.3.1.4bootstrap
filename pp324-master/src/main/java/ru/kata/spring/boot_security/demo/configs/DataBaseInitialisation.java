@@ -13,13 +13,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class IniziBD {
-    private UserService userService;
-    private RoleRepository roleRepository;
+public class DataBaseInitialisation {
+    private final UserService userService;
+    private final RoleRepository roleRepository;
 
 
-    @Autowired
-    public IniziBD(UserService userService, RoleRepository roleRepository) {
+
+    public DataBaseInitialisation(UserService userService, RoleRepository roleRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
     }
@@ -38,12 +38,18 @@ public class IniziBD {
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(adminRole);
         adminRoles.add(userRole);
-        User adminUser = new User("ali","tutu", 20L, "11", "11",adminRoles);
+        User adminUser = new User("user1","lastname1", 20L, "11", "11",adminRoles);
         userService.save(adminUser);
 
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
-        User regularUser = new User("turpal","tutu", 23L, "22", "22",userRoles);
+        User regularUser = new User("user2","lastname2", 23L, "22", "22",userRoles);
         userService.save(regularUser);
+
+        Set<Role> newUserRoles = new HashSet<>();
+        newUserRoles.add(adminRole);
+        newUserRoles.add(userRole);
+        User user =new User("user3", "lastname3", 30L, "33", "33", newUserRoles);
+        userService.save(user);
     }
 }

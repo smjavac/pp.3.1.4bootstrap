@@ -1,4 +1,5 @@
 package ru.kata.spring.boot_security.demo.models;
+
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Role implements GrantedAuthority{
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +23,7 @@ public class Role implements GrantedAuthority{
     public String getAuthority() {
         return roleName;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,6 +31,7 @@ public class Role implements GrantedAuthority{
         Role role = (Role) o;
         return Objects.equals(id, role.id) && Objects.equals(roleName, role.roleName);
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;

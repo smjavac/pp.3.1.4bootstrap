@@ -116,17 +116,17 @@
                                                                             name</strong></label>
                                                                         <input th:type="text"
                                                                                class="form-control"
-                                                                               th:name="lastName" id="editFirstName"
-                                                                               th:value="${user.lastName}">
+                                                                               th:name="firstName" id="editFirstName"
+                                                                               th:value="${user.firstName}">
+
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="lastNameEdit"><strong>Last
-                                                                            name</strong></label>
+                                                                        <label for="lastNameEdit"><strong>Last name</strong></label>
                                                                         <input th:type="text"
                                                                                class="form-control"
-                                                                               th:name="firstName"
+                                                                               th:name="lastName"
                                                                                id="lastNameEdit"
-                                                                               th:value="${user.firstName}">
+                                                                               th:value="${user.lastName}">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="ageEdit"><strong>Age</strong></label>
@@ -153,17 +153,12 @@
                                                                                th:value="${user.password}">
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="rolesEdit"><b>Role</b></label>
-                                                                        <select th:name="roles"
-                                                                                th:value="*{roles}" multiple
-                                                                                class="form-control form-control-sm"
-                                                                                id="rolesEdit"
-                                                                                name="roles" size="3" required>
-                                                                            <option th:each="role: ${roles}"
-                                                                                    th:value="${role.getId()}"
-                                                                                    th:text="${role.toString()}">
-                                                                            </option>
-                                                                        </select>
+                                                                        <label for="role"><strong>Role</strong></label>
+                                                                        <input th:type="text"
+                                                                               class="form-control"
+                                                                               th:name="id"
+                                                                               id="role"
+                                                                               th:value="${user.getRoles().toString().replace('[', '').replace(']', '')}" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
