@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -29,19 +28,15 @@ public class AdminController {
     }
 
     @PostMapping("/addNewUser")
-    public String saveUser(@ModelAttribute("user") User user, BindingResult result) {
-
+    public String saveUser(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/admin";
     }
 
     @PatchMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") @ModelAttribute("user") User user, BindingResult result) {
-        if (result.hasErrors()) {
-            return "redirect:/admin";
-        }
+    public String updateUser(@PathVariable("id") long id, @ModelAttribute("user") User user) {
         userService.update(user);
-        return "admin";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/delete/{id}")
